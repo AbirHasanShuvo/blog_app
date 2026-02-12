@@ -24,12 +24,11 @@ Route::middleware('auth:sanctum')->group(function(){
         'status' => true,
         'message' =>'check API working 🎉'
     ]);
+});
 
 
     //api start from here 
-
-    
-});
+    Route::get('/logout',[ AuthController::class, 'logout'])->name('logout');
 });
 
 
