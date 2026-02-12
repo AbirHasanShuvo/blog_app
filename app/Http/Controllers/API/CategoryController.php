@@ -14,7 +14,13 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::get();
+        return response()->json([
+            'status' => 'Success',
+            'count' => count($categories),
+            'data' => $categories
+
+        ],status: 200);
     }
 
     /**
@@ -60,7 +66,39 @@ class CategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validator = Validator::make($request->all(), rules : [
+            'name' => 'required',
+            'slug' => 'required'
+        ]);
+
+        if($validator->fails()){
+            return response()->json([
+                'status' => 'Failed',
+                'message' => $validator->errors()
+            ], 400);
+        }
+
+        $category = Category::find($id);
+
+        if($category){
+    $category->name = $request->name;
+    $category->slug = $request->slug;
+
+    $category->save();
+
+    return response()->json([
+        'status' => 'Succes',
+        'message' => 'Updated category succesfully'
+    ]);
+}
+else{
+    return response()->json([
+        'status' => 'Failed',
+        'message' => 'Category not found'
+    ]);
+}
+
+
     }
 
     /**

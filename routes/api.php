@@ -34,6 +34,8 @@ Route::middleware('auth:sanctum')->group(function(){
 
     Route::apiResource('/category', CategoryController::class)->middleware('role:admin');
 
+    
+
 
 
 
