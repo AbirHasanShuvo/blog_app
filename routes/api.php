@@ -16,4 +16,20 @@ Route::get('/test', function () {
 Route::post('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 
+//creating apis which can be accessed by logged in user only 
+
+Route::middleware('auth:sanctum')->group(function(){
+    Route::get('/check', function () {
+    return response()->json([
+        'status' => true,
+        'message' =>'check API working 🎉'
+    ]);
+
+
+    //api start from here 
+
+    
+});
+});
+
 

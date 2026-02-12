@@ -39,7 +39,7 @@ class AuthController extends Controller
     'email' => $request->email,
     'password' => bcrypt($request->password),
     'role' => $request->role ? $request->role : 'reader'
-];
+     ];
 
 
         User::create($data);
