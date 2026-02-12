@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\CategoryController;
 use App\Http\Middleware\RoleMiddleWare;
 use Illuminate\Support\Facades\Route;
 
@@ -31,15 +32,9 @@ Route::middleware('auth:sanctum')->group(function(){
     //api start from here 
     Route::get('/logout',[ AuthController::class, 'logout'])->name('logout');
 
-    Route::get('/admin', function(){
-        return response()->json(
-            [
-                'status' => 'Success',
-                'message' => 'Middleware in admin is perfectly working'
-            ]
-        );
+    Route::apiResource('/category', CategoryController::class)->middleware('role:admin');
 
-    })->middleware('role:admin');
+
 
 
 });
