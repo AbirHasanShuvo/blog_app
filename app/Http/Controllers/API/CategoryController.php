@@ -106,6 +106,20 @@ else{
      */
     public function destroy(string $id)
     {
-        //
+        $category = Category::find($id);
+
+        if(!$category){
+            return response()->json([
+                'status' => 'Failed',
+                'message' => 'Category not found'
+            ]);
+        }
+
+        $category->delete();
+
+        return response()->json([
+            'status' => 'Success',
+            'message' => 'Category has been deleted succesfully'
+        ]);
     }
 }
