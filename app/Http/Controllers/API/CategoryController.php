@@ -78,7 +78,8 @@ class CategoryController extends Controller
             ], 400);
         }
 
-        $category = Category::find($id);
+         $category = Category::findOrFail($id);
+        
 
         if($category){
     $category->name = $request->name;
@@ -106,7 +107,8 @@ else{
      */
     public function destroy(string $id)
     {
-        $category = Category::find($id);
+         $category = Category::findOrFail($id);
+        
 
         if(!$category){
             return response()->json([
